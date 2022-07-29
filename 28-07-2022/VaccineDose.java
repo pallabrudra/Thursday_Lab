@@ -1,4 +1,4 @@
-package Imheritancedemo;
+package Inheritancedemo;
 import java.util.*;
 
 abstract class vaccine
