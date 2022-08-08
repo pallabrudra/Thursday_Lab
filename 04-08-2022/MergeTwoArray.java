@@ -1,5 +1,5 @@
 /*
- wap to merger two array in to another array.
+ *wap to merger two array in to another array.
  */
 package arrayexamples;
 import java.util.Scanner;
