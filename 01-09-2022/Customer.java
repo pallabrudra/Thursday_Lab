@@ -10,7 +10,7 @@ public class Customer extends Bill {
 	double gst=17.25;
 	Customer()
 	{
-		Keys=super.addItem(); //All Menu item saved to arraylist Keys
+		Keys=super.addItem(); //all Menu items saved to arraylist "Keys"
 	}
 	void displayMenu() 
 	{
