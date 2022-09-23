@@ -1,0 +1,217 @@
+=======================
+Creating student table
+=======================
+mysql> create table student(reg_no int primary key, name varchar(50) not null, branch varchar(10) not null,contact varchar(20) not null, dob varchar(20), doj varchar(20),address varchar(50) not null,email varchar(20));
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| reg_no  | int         | NO   | PRI | NULL    |       |
+| name    | varchar(50) | NO   |     | NULL    |       |
+| branch  | varchar(10) | NO   |     | NULL    |       |
+| contact | varchar(20) | NO   |     | NULL    |       |
+| dob     | varchar(20) | YES  |     | NULL    |       |
+| doj     | varchar(20) | YES  |     | NULL    |       |
+| address | varchar(50) | NO   |     | NULL    |       |
+| email   | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+=======================
+Creating student table
+=======================
+
+mysql> create table subject(s_code varchar(20) primary key,s_name varchar(30) not null,semester int not null, weightage int not null);
+
+mysql> desc subject;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| s_code    | varchar(20) | NO   | PRI | NULL    |       |
+| s_name    | varchar(30) | NO   |     | NULL    |       |
+| semester  | int         | NO   |     | NULL    |       |
+| weightage | int         | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+=======================
+Creating marks table
+=======================
+
+mysql> create table marks(regi_no int(20), sub_code varchar(20),foreign key(regi_no) references student(reg_no), foreign key(sub_code) references subject(s_code), mark int not null);
+
+mysql> desc marks;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regi_no  | int         | YES  | MUL | NULL    |       |
+| sub_code | varchar(20) | YES  | MUL | NULL    |       |
+| mark     | int         | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+==================================
+Inserting value to student table
+==================================
+
+insert into student values(100,'Pallab','CSE','9876543214','07-07-1999','02-02-2022','Kolkata','pallab@gmail.com');
+insert into student values(101,'Nilanjan','CSE','9876543215','07-07-1998','02-02-2020','Kolkata','nilanjan@gmail.com');
+insert into student values(102,'Shawin','CSE','9876543216','07-07-1997','02-02-2020','Darjeeling','shawin@gmail.com');
+insert into student values(103,'Chandan','ECE','9876543217','07-07-1999','02-02-2022','Midnapore','chandan@gmail.com');
+insert into student values(104,'Randhir','ECE','9876543218','07-07-1999','02-02-2022','Mumbai','randhir@gmail.com');
+
+
+mysql> select * from student;
++--------+----------+--------+------------+------------+------------+------------+--------------------+
+| reg_no | name     | branch | contact    | dob        | doj        | address    | email              |
++--------+----------+--------+------------+------------+------------+------------+--------------------+
+|    100 | Pallab   | CSE    | 9876543214 | 07-07-1999 | 02-02-2022 | Kolkata    | pallab@gmail.com   |
+|    101 | Nilanjan | CSE    | 9876543215 | 07-07-1998 | 02-02-2020 | Kolkata    | nilanjan@gmail.com |
+|    102 | Shawin   | CSE    | 9876543216 | 07-07-1997 | 02-02-2020 | Darjeeling | shawin@gmail.com   |
+|    103 | Chandan  | ECE    | 9876543217 | 07-07-1999 | 02-02-2022 | Midnapore  | chandan@gmail.com  |
+|    104 | Randhir  | ECE    | 9876543218 | 07-07-1999 | 02-02-2022 | Mumbai     | randhir@gmail.com  |
++--------+----------+--------+------------+------------+------------+------------+--------------------+
+5 rows in set (0.00 sec)
+
+==================================
+Inserting value to subject table
+==================================
+
+insert into subject values('DSA','Data Structure Algorithm',1,100);
+insert into subject values('OS','Operating System',2,100);
+insert into subject values('SE','Software Engineering',3,100);
+insert into subject values('TE','Telecommunications Engineering',1,100);
+insert into subject values('ESD','Embedded Systems Design',2,100);
+insert into subject values('EE','Instrumentation Engineering',3,100);
+
+mysql> select * from subject;
++--------+--------------------------------+----------+-----------+
+| s_code | s_name                         | semester | weightage |
++--------+--------------------------------+----------+-----------+
+| DSA    | Data Structure Algorithm       |        1 |       100 |
+| EE     | Instrumentation Engineering    |        3 |       100 |
+| ESD    | Embedded Systems Design        |        2 |       100 |
+| OS     | Operating System               |        2 |       100 |
+| SE     | Software Engineering           |        3 |       100 |
+| TE     | Telecommunications Engineering |        1 |       100 |
++--------+--------------------------------+----------+-----------+
+6 rows in set (0.00 sec)
+
+
+==================================
+Inserting value to marks table
+==================================
+
+insert into marks values(100,'DSA',95);
+insert into marks values(100,'OS',90);
+insert into marks values(100,'SE',92);
+insert into marks values(101,'DSA',94);
+insert into marks values(101,'OS',89);
+insert into marks values(101,'SE',91);
+insert into marks values(102,'DSA',93);
+insert into marks values(102,'OS',88);
+insert into marks values(102,'SE',90);
+insert into marks values(103,'TE',87);
+insert into marks values(103,'ESD',88);
+insert into marks values(103,'EE',86);
+insert into marks values(104,'TE',85);
+insert into marks values(104,'ESD',89);
+insert into marks values(104,'EE',82);
+
+
+
+mysql> select * from marks;
++---------+----------+------+
+| regi_no | sub_code | mark |
++---------+----------+------+
+|     100 | DSA      |   95 |
+|     100 | OS       |   90 |
+|     100 | SE       |   92 |
+|     101 | DSA      |   94 |
+|     101 | OS       |   89 |
+|     101 | SE       |   91 |
+|     102 | DSA      |   93 |
+|     102 | OS       |   88 |
+|     102 | SE       |   90 |
+|     103 | TE       |   87 |
+|     103 | ESD      |   88 |
+|     103 | EE       |   86 |
+|     104 | TE       |   85 |
+|     104 | ESD      |   89 |
+|     104 | EE       |   82 |
++---------+----------+------+
+15 rows in set (0.00 sec)
+
+
+********
+Query
+********
+1. Student information should have registration_number, name, branch , contact #, DOB, Date of joining, Address, Email id.
+
+mysql> select * from student;
++--------+----------+--------+------------+------------+------------+------------+--------------------+
+| reg_no | name     | branch | contact    | dob        | doj        | address    | email              |
++--------+----------+--------+------------+------------+------------+------------+--------------------+
+|    100 | Pallab   | CSE    | 9876543214 | 07-07-1999 | 02-02-2022 | Kolkata    | pallab@gmail.com   |
+|    101 | Nilanjan | CSE    | 9876543215 | 07-07-1998 | 02-02-2020 | Kolkata    | nilanjan@gmail.com |
+|    102 | Shawin   | CSE    | 9876543216 | 07-07-1997 | 02-02-2020 | Darjeeling | shawin@gmail.com   |
+|    103 | Chandan  | ECE    | 9876543217 | 07-07-1999 | 02-02-2022 | Midnapore  | chandan@gmail.com  |
+|    104 | Randhir  | ECE    | 9876543218 | 07-07-1999 | 02-02-2022 | Mumbai     | randhir@gmail.com  |
++--------+----------+--------+------------+------------+------------+------------+--------------------+
+5 rows in set (0.00 sec)
+
+2. Information on subjects like subject code, subject name and weightage for calculating GPA.
+
+mysql> select s_code as 'subject code',s_name as 'subject name',weightage from subject;
++--------------+--------------------------------+-----------+
+| subject code | subject name                   | weightage |
++--------------+--------------------------------+-----------+
+| DSA          | Data Structure Algorithm       |       100 |
+| EE           | Instrumentation Engineering    |       100 |
+| ESD          | Embedded Systems Design        |       100 |
+| OS           | Operating System               |       100 |
+| SE           | Software Engineering           |       100 |
+| TE           | Telecommunications Engineering |       100 |
++--------------+--------------------------------+-----------+
+6 rows in set (0.00 sec)
+
+3. Students marks scored in each subject , semester wise.
+
+mysql> select regi_no as 'reg no.',s_code 'subject code',s_name as 'subject name',semester,mark as 'marks obtained',weightage from subject s inner join marks m on s.s_code=m.sub_code order by semester;
++---------+--------------+--------------------------------+----------+----------------+-----------+
+| reg no. | subject code | subject name                   | semester | marks obtained | weightage |
++---------+--------------+--------------------------------+----------+----------------+-----------+
+|     100 | DSA          | Data Structure Algorithm       |        1 |             95 |       100 |
+|     101 | DSA          | Data Structure Algorithm       |        1 |             94 |       100 |
+|     102 | DSA          | Data Structure Algorithm       |        1 |             93 |       100 |
+|     103 | TE           | Telecommunications Engineering |        1 |             87 |       100 |
+|     104 | TE           | Telecommunications Engineering |        1 |             85 |       100 |
+|     103 | ESD          | Embedded Systems Design        |        2 |             88 |       100 |
+|     104 | ESD          | Embedded Systems Design        |        2 |             89 |       100 |
+|     100 | OS           | Operating System               |        2 |             90 |       100 |
+|     101 | OS           | Operating System               |        2 |             89 |       100 |
+|     102 | OS           | Operating System               |        2 |             88 |       100 |
+|     103 | EE           | Instrumentation Engineering    |        3 |             86 |       100 |
+|     104 | EE           | Instrumentation Engineering    |        3 |             82 |       100 |
+|     100 | SE           | Software Engineering           |        3 |             92 |       100 |
+|     101 | SE           | Software Engineering           |        3 |             91 |       100 |
+|     102 | SE           | Software Engineering           |        3 |             90 |       100 |
++---------+--------------+--------------------------------+----------+----------------+-----------+
+15 rows in set (0.00 sec)
+
+
+4. Finally overall result of the student comprising GPA scored for a semester, scholarship eligibility.
+
+mysql> select reg_no, name, branch, sum(mark) as 'total', avg(mark)*.95 as 'GPA' from student s,subject sub, marks m where s.reg_no=m.regi_no and sub.s_code=m.sub_code group by reg_no;
++--------+----------+--------+-------+-----------+
+| reg_no | name     | branch | total | GPA       |
++--------+----------+--------+-------+-----------+
+|    100 | Pallab   | CSE    |   277 | 87.716667 |
+|    101 | Nilanjan | CSE    |   274 | 86.766667 |
+|    102 | Shawin   | CSE    |   271 | 85.816667 |
+|    103 | Chandan  | ECE    |   261 | 82.650000 |
+|    104 | Randhir  | ECE    |   256 | 81.066667 |
++--------+----------+--------+-------+-----------+
+5 rows in set (0.00 sec)
+
+
